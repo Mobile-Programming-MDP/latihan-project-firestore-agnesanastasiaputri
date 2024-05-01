@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "185453674834",
+    "project_id": "ff-pab-agnes",
+    "storage_bucket": "ff-pab-agnes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185453674834:android:48e1042d9e429d7a477a8b",
+        "android_client_info": {
+          "package_name": "com.example.flutterlist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnH6qCKmETN3Hb_G_k-TsO0D3vzwvLEiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185453674834:android:d6624931007a6ccf477a8b",
+        "android_client_info": {
+          "package_name": "com.example.flutterlistagnes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnH6qCKmETN3Hb_G_k-TsO0D3vzwvLEiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
