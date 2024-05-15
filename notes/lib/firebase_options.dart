@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '138403444096',
     projectId: 'notes-de742',
     authDomain: 'notes-de742.firebaseapp.com',
+    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
     storageBucket: 'notes-de742.appspot.com',
     measurementId: 'G-L4E7ZKX2MJ',
   );
@@ -55,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:138403444096:android:c1e718be6be96c38f7bd65',
     messagingSenderId: '138403444096',
     projectId: 'notes-de742',
+    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
     storageBucket: 'notes-de742.appspot.com',
   );
 
@@ -63,6 +65,7 @@ class DefaultFirebaseOptions {
     appId: '1:138403444096:ios:d3910894a6a5316bf7bd65',
     messagingSenderId: '138403444096',
     projectId: 'notes-de742',
+    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
     storageBucket: 'notes-de742.appspot.com',
     iosBundleId: 'com.example.notes',
   );
@@ -72,6 +75,7 @@ class DefaultFirebaseOptions {
     appId: '1:138403444096:ios:d3910894a6a5316bf7bd65',
     messagingSenderId: '138403444096',
     projectId: 'notes-de742',
+    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
     storageBucket: 'notes-de742.appspot.com',
     iosBundleId: 'com.example.notes',
   );
@@ -82,7 +86,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '138403444096',
     projectId: 'notes-de742',
     authDomain: 'notes-de742.firebaseapp.com',
+    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
     storageBucket: 'notes-de742.appspot.com',
     measurementId: 'G-6DECYVZ5CY',
   );
+
 }
