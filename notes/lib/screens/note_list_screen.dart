@@ -55,29 +55,48 @@ class NoteList extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 80),
               children: snapshot.data!.map((document) {
                 return Card(
-                  child: ListTile(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return NoteDialog(note: document);
-                        },
-                      );
-                    },
-                    title: Text(document.title),
-                    subtitle: Text(document.description),
-                    trailing: InkWell(
+                    child: Column(
+                  children: [
+                    document.imageUrl != null &&
+                            Uri.parse(document.imageUrl!).isAbsolute
+                        ? ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                            child: Image.network(
+                              document.imageUrl!,
+                              width: double.infinity,
+                              height: 150,
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                            ),
+                          )
+                        : Container(),
+                    ListTile(
                       onTap: () {
-                        //NoteService.deleteNote(document);
-                        showAlertDialog(context, document);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return NoteDialog(note: document);
+                          },
+                        );
                       },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Icon(Icons.delete),
+                      title: Text(document.title),
+                      subtitle: Text(document.description),
+                      trailing: InkWell(
+                        onTap: () {
+                          //NoteService.deleteNote(document);
+                          showAlertDialog(context, document);
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: Icon(Icons.delete),
+                        ),
                       ),
                     ),
-                  ),
-                );
+                  ],
+                ));
               }).toList(),
             );
         }
