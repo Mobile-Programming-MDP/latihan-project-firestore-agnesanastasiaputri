@@ -67,7 +67,10 @@ class _NoteDialogState extends State<NoteDialog> {
           ),
           Expanded(
               child: _imageFile != null
-                  ? Image.network(_imageFile!.path, fit: BoxFit.cover)
+                  ? Image.network(
+                      _imageFile!.path,
+                      fit: BoxFit.cover,
+                    )
                   : widget.note?.imageUrl != null &&
                           Uri.parse(widget.note!.imageUrl!).isAbsolute
                       ? Image.network(
@@ -104,7 +107,7 @@ class _NoteDialogState extends State<NoteDialog> {
               imageUrl: imageUrl,
               createdAt: widget.note?.createdAt,
             );
-            
+
             if (widget.note == null) {
               NoteService.addNote(note).whenComplete(() {
                 Navigator.of(context).pop();
