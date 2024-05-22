@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/services/note_service.dart';
 import 'package:notes/widgets/note_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NoteListScreen extends StatefulWidget {
   const NoteListScreen({super.key});
@@ -55,88 +56,115 @@ class NoteList extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 80),
               children: snapshot.data!.map((document) {
                 return Card(
-                    child: Column(
-                  children: [
-                    document.imageUrl != null &&
-                            Uri.parse(document.imageUrl!).isAbsolute
-                        ? ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
-                            child: Image.network(
-                              document.imageUrl!,
-                              width: double.infinity,
-                              height: 150,
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
-                            ),
-                          )
-                        : Container(),
-                    ListTile(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return NoteDialog(note: document);
-                          },
-                        );
-                      },
-                      title: Text(document.title),
-                      subtitle: Text(document.description),
-                      trailing: InkWell(
+                  child: Column(
+                    children: [
+                      document.imageUrl != null &&
+                              Uri.parse(document.imageUrl!).isAbsolute
+                          ? ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                              ),
+                              child: Image.network(
+                                document.imageUrl!,
+                                width: double.infinity,
+                                height: 150,
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                              ),
+                            )
+                          : Container(),
+                      ListTile(
                         onTap: () {
-                          //NoteService.deleteNote(document);
-                          showAlertDialog(context, document);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return NoteDialog(note: document);
+                            },
+                          );
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Icon(Icons.delete),
+                        title: Text(document.title),
+                        subtitle: Text(document.description),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                //open url launcher
+                                String url =
+                                    "https://www.google.com/maps/search/?api=1&query=${document.lat},${document.lng}";
+                                Uri uri = Uri.parse(url);
+                                _launchUrl(uri);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Icon(Icons.map),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showAlertDialog(context, document);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Icon(Icons.delete),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ));
+                    ],
+                  ),
+                );
               }).toList(),
             );
         }
       },
     );
   }
-}
 
-showAlertDialog(BuildContext context, Note document) {
-  // set up the buttons
-  Widget cancelButton = ElevatedButton(
-    child: const Text("No"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-  Widget continueButton = ElevatedButton(
-    child: const Text("Yes"),
-    onPressed: () {
-      NoteService.deleteNote(document).whenComplete(() {
+  Future<void> _launchUrl(_url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  showAlertDialog(BuildContext context, Note document) {
+    // set up the buttons
+    Widget cancelButton = ElevatedButton(
+      child: const Text("No"),
+      onPressed: () {
         Navigator.of(context).pop();
-      });
-    },
-  );
+      },
+    );
+    Widget continueButton = ElevatedButton(
+      child: const Text("Yes"),
+      onPressed: () {
+        NoteService.deleteNote(document).whenComplete(() {
+          Navigator.of(context).pop();
+        });
+      },
+    );
 
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Delete Note"),
-    content: const Text("Are you sure to delete Note?"),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Delete Note"),
+      content: const Text("Are you sure to delete Note?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
