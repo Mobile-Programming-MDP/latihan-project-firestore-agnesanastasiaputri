@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/models/note.dart';
+import 'package:notes/screens/google_maps_screen.dart';
 import 'package:notes/services/note_service.dart';
 import 'package:notes/widgets/note_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -91,10 +92,19 @@ class NoteList extends StatelessWidget {
                             InkWell(
                               onTap: () async {
                                 //open url launcher
-                                String url =
-                                    "https://www.google.com/maps/search/?api=1&query=${document.lat},${document.lng}";
-                                Uri uri = Uri.parse(url);
-                                _launchUrl(uri);
+                                // String url =
+                                //     "https://www.google.com/maps/search/?api=1&query=${document.lat},${document.lng}";
+                                // Uri uri = Uri.parse(url);
+                                // _launchUrl(uri);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GoogleMapsScreen(
+                                      latitude: double.parse(document.lat!),
+                                      longitude: double.parse(document.lng!),
+                                    ),
+                                  ),
+                                );
                               },
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
