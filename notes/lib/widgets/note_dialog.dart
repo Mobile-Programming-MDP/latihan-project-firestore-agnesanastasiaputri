@@ -126,23 +126,18 @@ class _NoteDialogState extends State<NoteDialog> {
               title: _titleController.text,
               description: _descriptionController.text,
               imageUrl: imageUrl,
-              lat: widget.note?.lat.toString() != _position!.latitude.toString()
-                  ? _position!.latitude.toString()
-                  : widget.note?.lat.toString(),
-              lng:
-                  widget.note?.lng.toString() != _position!.longitude.toString()
-                      ? _position!.longitude.toString()
-                      : widget.note?.lng.toString(),
+              lat:
+                  _position?.latitude.toString() ?? widget.note?.lat.toString(),
+              lng: _position?.longitude.toString() ??
+                  widget.note?.lng.toString(),
               createdAt: widget.note?.createdAt,
             );
             if (widget.note == null) {
-              NoteService.addNote(note).whenComplete(() {
-                Navigator.of(context).pop();
-              });
+              await NoteService.addNote(note);
             } else {
-              NoteService.updateNote(note)
-                  .whenComplete(() => Navigator.of(context).pop());
+              await NoteService.updateNote(note);
             }
+            Navigator.of(context).pop();
           },
           child: Text(widget.note == null ? 'Add' : 'Update'),
         ),

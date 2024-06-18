@@ -2,22 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/google_maps_screen.dart';
 import 'package:notes/services/note_service.dart';
+import 'package:notes/theme_provider.dart';
 import 'package:notes/widgets/note_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NoteListScreen extends StatefulWidget {
-  const NoteListScreen({super.key});
+class NoteListScreen extends StatelessWidget {
+  const NoteListScreen({Key? key}) : super(key: key);
 
-  @override
-  State<NoteListScreen> createState() => _NoteListScreenState();
-}
-
-class _NoteListScreenState extends State<NoteListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
+        actions: [
+          IconButton(
+            icon: Icon(Provider.of<ThemeProvider>(context).isDarkMode
+                ? Icons.light_mode
+                : Icons.dark_mode),
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+            },
+          ),
+        ],
       ),
       body: const NoteList(),
       floatingActionButton: FloatingActionButton(
@@ -37,7 +44,7 @@ class _NoteListScreenState extends State<NoteListScreen> {
 }
 
 class NoteList extends StatelessWidget {
-  const NoteList({super.key});
+  const NoteList({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,22 +66,21 @@ class NoteList extends StatelessWidget {
                 return Card(
                   child: Column(
                     children: [
-                      document.imageUrl != null &&
-                              Uri.parse(document.imageUrl!).isAbsolute
-                          ? ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
-                              ),
-                              child: Image.network(
-                                document.imageUrl!,
-                                width: double.infinity,
-                                height: 150,
-                                fit: BoxFit.cover,
-                                alignment: Alignment.center,
-                              ),
-                            )
-                          : Container(),
+                      if (document.imageUrl != null &&
+                          Uri.parse(document.imageUrl!).isAbsolute)
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
+                          child: Image.network(
+                            document.imageUrl!,
+                            width: double.infinity,
+                            height: 150,
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          ),
+                        ),
                       ListTile(
                         onTap: () {
                           showDialog(
@@ -91,11 +97,6 @@ class NoteList extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () async {
-                                //open url launcher
-                                // String url =
-                                //     "https://www.google.com/maps/search/?api=1&query=${document.lat},${document.lng}";
-                                // Uri uri = Uri.parse(url);
-                                // _launchUrl(uri);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -111,12 +112,10 @@ class NoteList extends StatelessWidget {
                                 child: Icon(Icons.map),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            const SizedBox(width: 10),
                             InkWell(
                               onTap: () {
-                                showAlertDialog(context, document);
+                                _showDeleteDialog(context, document);
                               },
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
@@ -136,14 +135,7 @@ class NoteList extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(_url) async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
-
-  showAlertDialog(BuildContext context, Note document) {
-    // set up the buttons
+  void _showDeleteDialog(BuildContext context, Note document) {
     Widget cancelButton = ElevatedButton(
       child: const Text("No"),
       onPressed: () {
@@ -159,7 +151,6 @@ class NoteList extends StatelessWidget {
       },
     );
 
-    // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: const Text("Delete Note"),
       content: const Text("Are you sure to delete Note?"),
@@ -169,7 +160,6 @@ class NoteList extends StatelessWidget {
       ],
     );
 
-    // show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
