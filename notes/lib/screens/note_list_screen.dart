@@ -123,7 +123,7 @@ class NoteList extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 // _shareImage(document);
-                                Share.share(document.title+document.description);
+                                Share.share("title: " + document.title + "\n" + "deskripsi: " + document.description + "\n" );
                               },
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
