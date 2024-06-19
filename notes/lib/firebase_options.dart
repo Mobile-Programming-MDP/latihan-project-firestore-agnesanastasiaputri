@@ -41,54 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyArMAJUxZDvzIYXM7NY0Dv1pPuPJvIAS8o',
-    appId: '1:138403444096:web:8af4dcf68fde0d43f7bd65',
-    messagingSenderId: '138403444096',
-    projectId: 'notes-de742',
-    authDomain: 'notes-de742.firebaseapp.com',
-    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
-    storageBucket: 'notes-de742.appspot.com',
-    measurementId: 'G-L4E7ZKX2MJ',
+    apiKey: 'AIzaSyBGQTJ-AwjVr3h2G_c0iisxjQPyoLl9KtU',
+    appId: '1:366916237252:web:53abb52f3181ebf453d691',
+    messagingSenderId: '366916237252',
+    projectId: 'agnesnotes',
+    authDomain: 'agnesnotes.firebaseapp.com',
+    storageBucket: 'agnesnotes.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDE60mqruf8UKznVXJX-Kz5E65KvCp8Onc',
-    appId: '1:138403444096:android:c1e718be6be96c38f7bd65',
-    messagingSenderId: '138403444096',
-    projectId: 'notes-de742',
-    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
-    storageBucket: 'notes-de742.appspot.com',
+    apiKey: 'AIzaSyAjn0iOWuSivkQtQWdYEDbQH_nSFSz96jg',
+    appId: '1:366916237252:android:1fa0f712eab6964753d691',
+    messagingSenderId: '366916237252',
+    projectId: 'agnesnotes',
+    storageBucket: 'agnesnotes.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC9-t1pCvPTWjhuA1-g5cVdioRa9VjP1PI',
-    appId: '1:138403444096:ios:d3910894a6a5316bf7bd65',
-    messagingSenderId: '138403444096',
-    projectId: 'notes-de742',
-    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
-    storageBucket: 'notes-de742.appspot.com',
+    apiKey: 'AIzaSyD6fkCHnA7SkSBPkux-FJK8B4Ij1L2KOoc',
+    appId: '1:366916237252:ios:97eac2f243dc1fbd53d691',
+    messagingSenderId: '366916237252',
+    projectId: 'agnesnotes',
+    storageBucket: 'agnesnotes.appspot.com',
     iosBundleId: 'com.example.notes',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC9-t1pCvPTWjhuA1-g5cVdioRa9VjP1PI',
-    appId: '1:138403444096:ios:d3910894a6a5316bf7bd65',
-    messagingSenderId: '138403444096',
-    projectId: 'notes-de742',
-    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
-    storageBucket: 'notes-de742.appspot.com',
+    apiKey: 'AIzaSyD6fkCHnA7SkSBPkux-FJK8B4Ij1L2KOoc',
+    appId: '1:366916237252:ios:97eac2f243dc1fbd53d691',
+    messagingSenderId: '366916237252',
+    projectId: 'agnesnotes',
+    storageBucket: 'agnesnotes.appspot.com',
     iosBundleId: 'com.example.notes',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyArMAJUxZDvzIYXM7NY0Dv1pPuPJvIAS8o',
-    appId: '1:138403444096:web:6aa3f20055a1d180f7bd65',
-    messagingSenderId: '138403444096',
-    projectId: 'notes-de742',
-    authDomain: 'notes-de742.firebaseapp.com',
-    databaseURL: 'https://notes-de742-default-rtdb.firebaseio.com',
-    storageBucket: 'notes-de742.appspot.com',
-    measurementId: 'G-6DECYVZ5CY',
+    apiKey: 'AIzaSyBGQTJ-AwjVr3h2G_c0iisxjQPyoLl9KtU',
+    appId: '1:366916237252:web:351902b4b4e7ff8f53d691',
+    messagingSenderId: '366916237252',
+    projectId: 'agnesnotes',
+    authDomain: 'agnesnotes.firebaseapp.com',
+    storageBucket: 'agnesnotes.appspot.com',
   );
 
 }

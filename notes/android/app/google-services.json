@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "138403444096",
-    "firebase_url": "https://notes-de742-default-rtdb.firebaseio.com",
-    "project_id": "notes-de742",
-    "storage_bucket": "notes-de742.appspot.com"
+    "project_number": "366916237252",
+    "project_id": "agnesnotes",
+    "storage_bucket": "agnesnotes.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:138403444096:android:c1e718be6be96c38f7bd65",
+        "mobilesdk_app_id": "1:366916237252:android:1fa0f712eab6964753d691",
         "android_client_info": {
           "package_name": "com.example.notes"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDE60mqruf8UKznVXJX-Kz5E65KvCp8Onc"
+          "current_key": "AIzaSyAjn0iOWuSivkQtQWdYEDbQH_nSFSz96jg"
         }
       ],
       "services": {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:notes/models/note.dart';
 import 'package:notes/screens/google_maps_screen.dart';
@@ -6,6 +8,9 @@ import 'package:notes/theme_provider.dart';
 import 'package:notes/widgets/note_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 class NoteListScreen extends StatelessWidget {
   const NoteListScreen({Key? key}) : super(key: key);
@@ -112,6 +117,20 @@ class NoteList extends StatelessWidget {
                                 child: Icon(Icons.map),
                               ),
                             ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // _shareImage(document);
+                                Share.share(document.title+document.description);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Icon(Icons.share),
+                                
+                              ),
+                            ),
                             const SizedBox(width: 10),
                             InkWell(
                               onTap: () {
@@ -133,6 +152,30 @@ class NoteList extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _shareImage(Note document) async {
+    try {
+      final response = await http.get(Uri.parse(document.imageUrl!));
+      final documentDirectory = (await getTemporaryDirectory()).path;
+      final imgFile = File('$documentDirectory/flutter.png');
+      imgFile.writeAsBytesSync(response.bodyBytes);
+
+      final message =
+          'Title: ${document.title}\nDescription: ${document.description}\n'
+          'Location: https://www.google.com/maps/search/?api=1&query=${document.lat},${document.lng}';
+
+      Share.shareXFiles([XFile(imgFile.path)], text: message);
+    } catch (e) {
+      print('Error sharing image: $e');
+    }
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (!await canLaunch(url)) {
+      throw Exception('Could Not Launch $url');
+    }
+    await launch(url);
   }
 
   void _showDeleteDialog(BuildContext context, Note document) {
